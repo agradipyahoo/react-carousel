@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en" data-framework="javascript">
+  <head>
+    <meta charset="utf-8">
+    <title>Carousel React Example</title>
+    <style>
+
+    body {
+      overflow: hidden;
+    }
+
+    .carousel {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .carousel__prev, .carousel__next {
+      cursor: pointer;
+      position: absolute;
+      background: rgba(0, 0, 0, 0.6);
+      font-size: 32px;
+      color: white;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      top: 50%;
+      margin-top: -30px;
+      z-index: 1000;
+    }
+    .carousel__prev {
+      left: 40px;
+    }
+    .carousel__next {
+      right: 40px;
+    }
+    .carousel__slide {
+      width: 100%;
+      height: 100%;
+    }
+    .carousel__slide div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-list{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-list li{
+      list-style: none;
+      display: inline-block;
+    }
+    .translate-enter {
+      -webkit-transform: translateX(100vw);
+              transform: translateX(100vw);
+    }
+
+    .translate-enter.translate-enter-active {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      -webkit-transition: all 500ms ease-in-out;
+      transition: all 500ms ease-in-out;
+    }
+
+    .translate-leave {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+
+    .translate-leave.translate-leave-active {
+      -webkit-transform: translateX(-100vw);
+              transform: translateX(-100vw);
+      -webkit-transition: all 500ms ease-in-out;
+      transition: all 500ms ease-in-out;
+    }
+
+    .scale-appear, .blur-appear, .rotate-appear, .translate-appear {
+      -webkit-filter: grayscale(100%);
+              filter: grayscale(100%);
+      -webkit-transition: all 1000ms ease-in-out;
+      transition: all 1000ms ease-in-out;
+    }
+
+    .scale-appear.scale-appear-active, .blur-appear.blur-appear-active, .rotate-appear.rotate-appear-active, .translate-appear.translate-appear-active {
+      -webkit-filter: grayscale(0);
+              filter: grayscale(0);
+    }
+
+    .scale-enter {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+
+    .scale-enter.scale-enter-active {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-transition: all 500ms ease-in-out;
+      transition: all 500ms ease-in-out;
+    }
+
+    .scale-leave {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      opacity: 1;
+    }
+
+    .scale-leave.scale-leave-active {
+      -webkit-transform: scale(1.2);
+              transform: scale(1.2);
+      opacity: .01;
+      -webkit-transition: all 500ms ease-in-out;
+      transition: all 500ms ease-in-out;
+    }
+
+    .blur-enter {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+
+    .blur-enter.blur-enter-active {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-transition: all 500ms ease-in-out;
+      transition: all 500ms ease-in-out;
+    }
+
+    .blur-leave {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      opacity: 1;
+    }
+
+    .blur-leave.blur-leave-active {
+      -webkit-filter: blur(40px);
+              filter: blur(40px);
+      opacity: .01;
+      -webkit-transition: all 500ms ease-in-out;
+      transition: all 500ms ease-in-out;
+    }
+
+    .rotate-enter {
+      -webkit-filter: hue-rotate(-180deg);
+              filter: hue-rotate(-180deg);
+      opacity: .01;
+    }
+
+    .rotate-enter.rotate-enter-active {
+      -webkit-filter: hue-rotate(0deg);
+              filter: hue-rotate(0deg);
+      opacity: 1;
+      -webkit-transition: all 500ms ease-in-out;
+      transition: all 500ms ease-in-out;
+    }
+
+    .rotate-leave {
+      -webkit-filter: hue-rotate(0deg);
+              filter: hue-rotate(0deg);
+      opacity: 1;
+    }
+
+    .rotate-leave.rotate-leave-active {
+      -webkit-filter: hue-rotate(180deg);
+              filter: hue-rotate(180deg);
+      opacity: .01;
+      -webkit-transition: all 500ms ease-in-out;
+      transition: all 500ms ease-in-out;
+    }
+
+
+
+    .slide-enter {
+        transform: translateX(-100%);
+    }
+
+    .slide-enter-active {
+        animation: slide-in 300ms ease-out forwards;
+    }
+
+    .slide-leave {
+        transform: translateX(0%);
+    }
+
+    .slide-leave-active {
+        animation: slide-out 300ms ease-out forwards;
+    }
+
+    @keyframes slide-in {
+        from {
+            transform: translateX(-100%);
+        }
+
+        to {
+            transform: translateX(0%);
+        }
+    }
+
+    @keyframes slide-out {
+        from {
+            transform: translateX(0%);
+        }
+
+        to {
+            transform: translateX(100%);
+        }
+    }
+
+    .flip-enter {
+        transform: rotateY(180deg);
+    }
+
+    .flip-enter-active {
+        animation: flip-in 300ms ease-out forwards;
+    }
+
+    .flip-leave {
+        transform: rotateY(0deg);
+    }
+
+    .flip-leave-active {
+        animation: flip-out 300ms ease-out forwards;
+    }
+
+    @keyframes flip-in {
+        from {
+            transform: rotateY(180deg);
+        }
+
+        to {
+            transform: rotateY(0deg);
+        }
+    }
+
+    @keyframes flip-out {
+        from {
+            transform: rotateY(0deg);
+        }
+
+        to {
+            transform: rotateY(90deg);
+        }
+    }
+</style>
+    
+  <link href="styles.app.css" rel="stylesheet"></head>
+  <body>
+    <div id="app"></div>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-with-addons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>-->
+  <script type="text/javascript" src="bundle.app.js"></script></body>
+</html>

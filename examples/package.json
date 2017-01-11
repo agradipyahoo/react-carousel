@@ -1,0 +1,57 @@
+{
+  "name": "carousel-example",
+  "version": "1.0.0",
+  "description": "carousel example pages",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "webpack --env.prod -p",
+    "prebuild:dev": "rimraf dist",
+    "build:dev": "webpack --env.dev",
+    "postbuild": "cpy src/css/* dist",
+    "start": "http-server dist",
+    "dev": "webpack-dev-server --env.dev --hot",
+    "debug": "node-nightly --inspect --debug-brk node_modules/.bin/webpack --env.debug",
+    "debug:dev": "npm run debug -- --env.dev",
+    "debug:prod": "npm run debug -- --env.prod",
+    "validate": "npm-run-all --parallel lint build test",
+    "lint": "eslint ."
+  },
+  "author": "Agradip Sarkar",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agradipyahoo/react-carousel.git"
+  },
+  "devDependencies": {
+    "babel-core": "6.13.2",
+    "babel-loader": "6.2.4",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-es2015": "6.13.2",
+    "babel-preset-es2016": "6.11.3",
+    "babel-preset-react": "6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-preset-stage-2": "6.13.0",
+    "cpy-cli": "1.0.1",
+    "css-loader": "0.23.1",
+    "eslint": "3.2.2",
+    "eslint-config-kentcdodds": "^9.0.0",
+    "extract-text-webpack-plugin": "2.0.0-beta.3",
+    "html-webpack-plugin": "2.22.0",
+    "inline-manifest-webpack-plugin": "3.0.1",
+    "npm-run-all": "2.3.0",
+    "opt-cli": "1.5.1",
+    "progress-bar-webpack-plugin": "1.9.0",
+    "react-addons-css-transition-group": "^15.4.2",
+    "rimraf": "2.5.4",
+    "style-loader": "0.13.1",
+    "webpack": "2.1.0-beta.20",
+    "webpack-config-utils": "2.0.0",
+    "webpack-dev-server": "2.1.0-beta.0",
+    "webpack-validator": "2.2.7"
+  }
+}
