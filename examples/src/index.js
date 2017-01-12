@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 // import Carousel from "react-carousel-component";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
-export default class Carousel2 extends React.Component{
+export default class Carousel extends React.Component{
   constructor(props) {
     super(props);
     let {noOfVisibleItem : noOfVisibleItem = 1 ,
@@ -95,7 +95,7 @@ const Example = ()=>{
   let config = {
     items : items
   }
-  ReactDOM.render(<Carousel2 items={items} noOfVisibleItem={3}/>,document.getElementById('app'));
+  ReactDOM.render(<Carousel items={items} noOfVisibleItem={3}/>,document.getElementById('app'));
 }
 
 

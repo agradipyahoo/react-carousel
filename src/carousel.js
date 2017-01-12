@@ -13,16 +13,17 @@ export default class Carousel extends React.Component{
     let {noOfVisibleItem : noOfVisibleItem = 1 ,
         showPagination:showPagination = false,items:items=[]} = this.props;
     this.totalPageNo = Math.ceil(items.length / noOfVisibleItem);
-    this.itemWidth = (100/noOfVisibleItem).toFixed(2);
     this.noOfVisibleItem = noOfVisibleItem;
     this.currentPageNo = 1;
+    this.itemWidth = (100/noOfVisibleItem).toFixed(2);
     this.items = items;
 
   }
   componentWillMount(){
     let items = this.getVisibaleItems(this.items , 0 , this.noOfVisibleItem);
     this.setState({
-      items : items
+      items : items,
+      animationDir:'right'
     })
   }
 
@@ -35,20 +36,21 @@ export default class Carousel extends React.Component{
   }
   goPrev =(e)=>{
     e.preventDefault();
-    this.goPage(this.currentPageNo -1);
+    this.goPage(this.currentPageNo -1,'left');
   }
 
   goNext=(e)=>{
     e.preventDefault();
-    this.goPage(this.currentPageNo + 1);
+    this.goPage(this.currentPageNo + 1 ,'right');
   }
 
-  goPage =(pageNo)=>{
+  goPage =(pageNo,dir)=>{
     this.currentPageNo = pageNo;
     let noOfVisibleItem = this.noOfVisibleItem;
     let start = (pageNo -1) * noOfVisibleItem , end = pageNo * noOfVisibleItem;
     this.setState({
-      items : this.getVisibaleItems(this.items , start , end)
+      items : this.getVisibaleItems(this.items , start , end),
+      animationDir:dir
     });
   }
 
@@ -70,20 +72,24 @@ export default class Carousel extends React.Component{
     let {transitionName : transitionName = 'slide',
         noOfVisibleItem : noOfVisibleItem = 1 ,
         showPagination:showPagination = false} = this.props;
+        transitionName = transitionName + '-' + this.state.animationDir;
+        let style = {
+          width : this.itemWidth + '%'
+        }
     return <div className="carousel-container">
+          {this.hasPrevious() && <div className="carousel__prev" onClick={this.goPrev.bind(this)}>◀</div>}
           <div className="carousel">
-            {this.hasPrevious() && <div className="carousel__prev" onClick={this.goPrev.bind(this)}>◀</div>}
-            {this.hasNext() && <div className="carousel__next" onClick={this.goNext.bind(this)}>▶</div>}
             <ReactCSSTransitionGroup transitionName={transitionName}
-            transitionEnterTimeout={500} transitionLeaveTimeout={500}
-            component="ul" className="carousel-list">
+            transitionEnterTimeout={500} transitionLeave={500}
+            component="div" className="carousel-list">
               {this.state.items.map((item, i) => {
                   return (
-                      <li key={item.id} className="carousel-item">{item.name}</li>
+                      <div key={item.id} className="carousel-item blue" style={style}><h3>{item.name}</h3></div>
                   );
               })}
             </ReactCSSTransitionGroup>
           </div>
+          {this.hasNext() && <div className="carousel__next" onClick={this.goNext.bind(this)}>▶</div>}
     </div>;
   }
 }

@@ -218,21 +218,21 @@
 
     @keyframes slide-left-in {
         from {
-            transform: translateX(100%);
+            transform: translateX(0%);
         }
 
         to {
-            transform: translateX(0%);
+            transform: translateX(-100%);
         }
     }
 
     @keyframes slide-left-out {
         from {
-            transform: translateX(100%);
+            transform: translateX(0%);
         }
 
         to {
-            transform: translateX(200%);
+            transform: translateX(-1%);
         }
     }
 
@@ -242,7 +242,7 @@
         }
 
         to {
-            transform: translateX(-100%);
+            transform: translateX(100%);
         }
     }
 
@@ -291,71 +291,10 @@
             transform: rotateY(90deg);
         }
     }
-
-
-    .flex-container {
-    display: inline-flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-content: center;
-    align-items: flex-start;
-    }
-
-.flex-item:nth-child(1) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-    }
-
-.flex-item:nth-child(2) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-    }
-
-.flex-item:nth-child(3) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-    }
-
-.flex-item:nth-child(4) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-    }
-
-.flex-item:nth-child(5) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-    }
-
-.flex-item:nth-child(6) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-    }
-
-.flex-item:nth-child(7) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-    }
-
-.flex-item:nth-child(8) {
-    order: 0;
-    flex: 0 1 auto;
-    align-self: auto;
-    }s
 </style>
     <%=htmlWebpackPlugin.files.webpackManifest%>
   </head>
   <body>
     <div id="app" class="container"></div>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-with-addons.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>-->
   </body>
 </html>
