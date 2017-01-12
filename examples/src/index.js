@@ -1,29 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Carousel from "react-carousel-component";
+// import Carousel from "react-carousel-component";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
-console.log(ReactCSSTransitionGroup);
-class ReactCSSTransitionGroup2 extends ReactCSSTransitionGroup {
-
-    componentWillAppear(){
-
-    }
-    componentDidAppear(){
-
-    }
-    componentWillEnter(){
-
-    }
-    componentDidEnter(){
-
-    }
-    componentWillLeave(){
-
-    }
-    componentDidLeave(){
-
-    }
-}
 export default class Carousel2 extends React.Component{
   constructor(props) {
     super(props);
@@ -96,15 +74,15 @@ export default class Carousel2 extends React.Component{
     return <div className="carousel-container">
           {this.hasPrevious() && <div className="carousel__prev" onClick={this.goPrev.bind(this)}>◀</div>}
           <div className="carousel">
-            <ReactCSSTransitionGroup2 transitionName={transitionName}
-            transitionEnterTimeout={500} transitionLeave={false}
+            <ReactCSSTransitionGroup transitionName={transitionName}
+            transitionEnterTimeout={500} transitionLeave={500}
             component="div" className="carousel-list">
               {this.state.items.map((item, i) => {
                   return (
                       <div key={item.id} className="carousel-item blue" style={style}><h3>{item.name}</h3></div>
                   );
               })}
-            </ReactCSSTransitionGroup2>
+            </ReactCSSTransitionGroup>
           </div>
           {this.hasNext() && <div className="carousel__next" onClick={this.goNext.bind(this)}>▶</div>}
     </div>;
